@@ -1,8 +1,94 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1 class="display-4">The Greenhouse Manager</h1>
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">     
+    <div class="container-fluid text-center mt-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="top" title="Add Plant">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="Plants" asp-action="Create">Add a Plant</a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="right" title="Shipping Schedule">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="Loads" asp-action="Index">Shipping Schedule</a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="right" title="Dock / Lot">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="Docklots" asp-action="Index">Docklot</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="top" title="Add Trailer to Dock">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="Docklots" asp-action="CreateDock">Add Trailer to Dock</a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="top" title="Add Trailer to Lot">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="DockLots" asp-action="CreateLot">Add Trailer to Lot</a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="top" title="Receiving Schedule New">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="ReceivingLoads" asp-action="Create">Receiving Schedule New</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="top" title="Receiving Schedule">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="ReceivingLoads" asp-action="Index">Receiving Schedule</a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="top" title="LTL Schedule">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="Loads" asp-action="IndexLTL">LTL Schedule</a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow h-100" data-toggle="tooltip" data-placement="top" title="Manage Yard">
+                    <div class="card-body" role="button">
+                        <h5 class="card-title"><a class="nav-link text-dark stretched-link" onclick="return DisplayProgressMessage(this, 'Loading...');" asp-area="" asp-controller="Yards" asp-action="Index">Manage Yarded Trailers</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        function DisplayProgressMessage(ctl, msg) {
+            $(ctl).prop("disable", true).text(msg);
+            $("body").addClass("submit-progress-bg");
+            $(".submit.progress").removeClass("hidden");
+            setTimeout(function () {
+                $(ctl).click();
+            }, 1);
+            return true;
+        }
+    </script>
+}

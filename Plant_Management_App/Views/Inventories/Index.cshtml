@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Plant_Management_App.Models.Inventory>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h1 class="mt-5">Inventory List</h1>
+
+<p>
+    <a asp-action="Create">New Inventory Item</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered table-light table-striped m-auto custom-table text-dark">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Plant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BatchID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantityAvailable)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>                
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.InventoryID">Edit</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.InventoryID">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.InventoryID">Delete</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Plant.PlantID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BatchID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityAvailable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>                
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>

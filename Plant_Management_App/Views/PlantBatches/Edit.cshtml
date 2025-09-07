@@ -1,0 +1,63 @@
+﻿@model Plant_Management_App.Models.PlantBatch
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<br />
+<h1 class="mt-5">Edit Batch # @Model.BatchID</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BatchID" />
+            <div class="form-group">
+                <label asp-for="PlantID" class="control-label"></label>
+                @Html.DropDownListFor(model => model.PlantID, (SelectList)ViewBag.PlantID, "Select Plant", new { @class = "form-control" })
+                <span asp-validation-for="PlantID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GreenhouseID" class="control-label"></label>
+                @Html.DropDownListFor(model => model.GreenhouseID, (SelectList)ViewBag.GreenhouseID, "Select Greenhouse", new { @class = "form-control" })
+                <span asp-validation-for="GreenhouseID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeedDate" class="control-label"></label>
+                <input asp-for="SeedDate" type="text" class="form-control pickDate" readonly placeholder="Click to Select Date" required />
+                <span asp-validation-for="SeedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransplantDate" class="control-label"></label>
+                <input asp-for="TransplantDate" type="text" class="form-control pickDate" readonly placeholder="Click to Select Date" required />
+                <span asp-validation-for="TransplantDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityPlanted" class="control-label"></label>
+                <input asp-for="QuantityPlanted" class="form-control" />
+                <span asp-validation-for="QuantityPlanted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpectedHarvestDate" class="control-label"></label>
+                <input asp-for="ExpectedHarvestDate" type="text" class="form-control pickDate" readonly placeholder="Click to Select Date" required />
+                <span asp-validation-for="ExpectedHarvestDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary mt-2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary mt-2" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

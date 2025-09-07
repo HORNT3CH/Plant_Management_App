@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Plant_Management_App.Models.PlantBatch>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h1 class="mt-5">Plant Batch List</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Add Batch</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered table-light table-striped m-auto custom-table text-dark">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Plant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Greenhouse)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SeedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransplantDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantityPlanted)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpectedHarvestDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>                
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td class="fit">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.BatchID">Edit</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.BatchID">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.BatchID">Delete</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Plant.PlantID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Greenhouse.GreenhouseID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransplantDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityPlanted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpectedHarvestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>                
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Plant_Management_App.Models.Plant>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h1 class="mt-5">Plant List</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Add Plant</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered table-light table-striped m-auto custom-table text-dark">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CommonName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ScientificName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PlantType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GrowingSeason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SunRequirements)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WaterRequirements)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoilType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImagePath)
+                </th>                
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td class="fit">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.PlantID">Edit</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.PlantID">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.PlantID">Delete</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommonName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScientificName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlantType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrowingSeason)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SunRequirements)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WaterRequirements)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoilType)
+                </td>
+                <td>
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="~/@item.ImagePath" alt="@item.CommonName" width="120" class="img-thumbnail" />
+                        }
+                        else
+                        {
+                            <span>No image</span>
+                        }
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>

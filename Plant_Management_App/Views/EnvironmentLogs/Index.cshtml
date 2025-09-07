@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Plant_Management_App.Models.EnvironmentLog>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h1 class="mt-5">Environment Log List</h1>
+
+<p>
+    <a asp-action="Create">New EnvironmentLog</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered table-light table-striped m-auto custom-table text-dark">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Greenhouse)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LogDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TermperatureC)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HumidityPercent)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>                
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.LogID">Edit</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.LogID">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.LogID">Delete</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Greenhouse.GreenhouseID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TermperatureC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HumidityPercent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>                
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>

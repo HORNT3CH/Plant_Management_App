@@ -1,0 +1,51 @@
+﻿@model Plant_Management_App.Models.EnvironmentLog
+
+@{
+    ViewData["Title"] = "Create";
+}
+<br />
+<h1 class="mt-5">Create Environment Log</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GreenhouseID" class="control-label"></label>
+                <select asp-for="GreenhouseID" class ="form-control" asp-items="ViewBag.GreenhouseID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LogDate" class="control-label"></label>
+                <input asp-for="LogDate" class="form-control" />
+                <span asp-validation-for="LogDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TermperatureC" class="control-label"></label>
+                <input asp-for="TermperatureC" class="form-control" />
+                <span asp-validation-for="TermperatureC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HumidityPercent" class="control-label"></label>
+                <input asp-for="HumidityPercent" class="form-control" />
+                <span asp-validation-for="HumidityPercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary mt-2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary mt-2" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

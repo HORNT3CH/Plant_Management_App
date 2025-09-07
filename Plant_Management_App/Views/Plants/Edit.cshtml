@@ -1,0 +1,79 @@
+﻿@model Plant_Management_App.Models.Plant
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<br />
+<h1 class="mt-5">Edit @Model.CommonName</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PlantID" />
+            <div class="form-group">
+                <label asp-for="CommonName" class="control-label"></label>
+                <input asp-for="CommonName" class="form-control" />
+                <span asp-validation-for="CommonName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScientificName" class="control-label"></label>
+                <input asp-for="ScientificName" class="form-control" />
+                <span asp-validation-for="ScientificName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantType" class="control-label"></label>
+                <input asp-for="PlantType" class="form-control" />
+                <span asp-validation-for="PlantType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrowingSeason" class="control-label"></label>
+                <input asp-for="GrowingSeason" class="form-control" />
+                <span asp-validation-for="GrowingSeason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SunRequirements" class="control-label"></label>
+                <input asp-for="SunRequirements" class="form-control" />
+                <span asp-validation-for="SunRequirements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaterRequirements" class="control-label"></label>
+                <input asp-for="WaterRequirements" class="form-control" />
+                <span asp-validation-for="WaterRequirements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoilType" class="control-label"></label>
+                <input asp-for="SoilType" class="form-control" />
+                <span asp-validation-for="SoilType" class="text-danger"></span>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <div class="form-group">
+                    <label>Current Image</label><br />
+                    <img src="~/@Model.ImagePath" alt="@Model.CommonName" width="200" class="img-thumbnail" />
+                </div>
+            }
+            <div class="form-group">
+                <label>Replace Image</label>
+                <input type="file" name="ImageFile" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary mt-2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary mt-2" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

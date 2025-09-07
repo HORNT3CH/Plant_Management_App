@@ -7,7 +7,7 @@ namespace Plant_Management_App.Models
     {
         [Key]
         public int PlantID { get; set; }
-        [DisplayName("Common Name")]
+        [DisplayName("Plant Name")]
         public string? CommonName { get; set; }
         [DisplayName("Scientific Name")]
         public string? ScientificName { get; set; }
@@ -22,6 +22,8 @@ namespace Plant_Management_App.Models
         public string? WaterRequirements { get; set; }
         [DisplayName("Soil Type")]
         public string? SoilType { get; set; }
+        [DisplayName("Plant Image")]
+        public string? ImagePath { get; set; } // e.g., "images/plants/plant1.jpg"
 
         public ICollection<PlantBatch>? PlantBatches { get; set;}
         public ICollection<Inventory>? Inventories { get; set; }

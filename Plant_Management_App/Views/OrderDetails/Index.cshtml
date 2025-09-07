@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Plant_Management_App.Models.OrderDetail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h1 class="mt-5">Order Detail List</h1>
+
+<p>
+    <a asp-action="Create">New Order Detail</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered table-light table-striped m-auto custom-table text-dark">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Inventory)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>                
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.OrderDetailID">Edit</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.OrderDetailID">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.OrderDetailID">Delete</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.OrderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inventory.InventoryID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>                
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
