@@ -15,5 +15,6 @@ namespace Plant_Management_App
         }
 
         public DbSet<Plant_Management_App.Models.Order> Order { get; set; } = default!;
+        public DbSet<Plant_Management_App.Models.Customer> Customer { get; set; } = default!;
     }
 }

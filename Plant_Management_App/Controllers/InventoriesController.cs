@@ -47,8 +47,9 @@ namespace Plant_Management_App.Controllers
 
         // GET: Inventories/Create
         public IActionResult Create()
-        {
-            ViewData["PlantID"] = new SelectList(_context.Set<Plant>(), "PlantID", "PlantID");
+        {            
+            ViewBag.PlantID = new SelectList(_context.Plant.OrderBy(s => s.CommonName), "PlantID", "CommonName");
+            ViewBag.PlantBatchID = new SelectList(_context.PlantBatch.OrderBy(s => s.BatchID), "BatchID", "BatchID");
             return View();
         }
 

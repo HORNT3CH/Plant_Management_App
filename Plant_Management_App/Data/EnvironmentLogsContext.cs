@@ -15,5 +15,6 @@ namespace Plant_Management_App
         }
 
         public DbSet<Plant_Management_App.Models.EnvironmentLog> EnvironmentLog { get; set; } = default!;
+        public DbSet<Plant_Management_App.Models.Greenhouse> Greenhouse { get; set; } = default!;
     }
 }

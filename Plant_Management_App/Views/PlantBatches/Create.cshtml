@@ -14,10 +14,12 @@
             <div class="form-group">
                 <label asp-for="PlantID" class="control-label"></label>                
                 @Html.DropDownListFor(model => model.PlantID, (SelectList)ViewBag.PlantID, "Select Plant", new { @class = "form-control" })
+                <span asp-validation-for="PlantID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GreenhouseID" class="control-label"></label>
                 @Html.DropDownListFor(model => model.GreenhouseID, (SelectList)ViewBag.GreenhouseID, "Select Greenhouse", new { @class = "form-control" })
+                <span asp-validation-for="GreenhouseID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SeedDate" class="control-label"></label>                

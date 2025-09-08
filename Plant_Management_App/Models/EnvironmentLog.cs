@@ -14,7 +14,7 @@ namespace Plant_Management_App.Models
         [DisplayName("Log Date")]
         public DateTime LogDate { get; set; }
         [DisplayName("Temperature (°C)")]
-        public decimal TermperatureC { get; set; }
+        public decimal TemperatureC { get; set; }
         [DisplayName("Humidity (%)")]
         public decimal HumidityPercent { get; set; }
         public string? Notes { get; set; }

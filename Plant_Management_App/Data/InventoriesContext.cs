@@ -15,5 +15,7 @@ namespace Plant_Management_App
         }
 
         public DbSet<Plant_Management_App.Models.Inventory> Inventory { get; set; } = default!;
+        public DbSet<Plant_Management_App.Models.Plant> Plant { get; set; } = default!;
+        public DbSet<Plant_Management_App.Models.PlantBatch> PlantBatch { get; set; } = default!;        
     }
 }

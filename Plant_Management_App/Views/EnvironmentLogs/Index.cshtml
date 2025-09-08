@@ -7,7 +7,7 @@
 <h1 class="mt-5">Environment Log List</h1>
 
 <p>
-    <a asp-action="Create">New EnvironmentLog</a>
+    <a class="btn btn-success" asp-action="Create">New EnvironmentLog</a>
 </p>
 <div class="table-responsive">
     <table class="table table-bordered table-light table-striped m-auto custom-table text-dark">
@@ -21,7 +21,7 @@
                     @Html.DisplayNameFor(model => model.LogDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TermperatureC)
+                    @Html.DisplayNameFor(model => model.TemperatureC)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.HumidityPercent)
@@ -46,7 +46,7 @@
                     @Html.DisplayFor(modelItem => item.LogDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TermperatureC)
+                    @Html.DisplayFor(modelItem => item.TemperatureC)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HumidityPercent)

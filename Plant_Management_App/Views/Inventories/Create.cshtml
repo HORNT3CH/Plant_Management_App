@@ -12,12 +12,13 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="PlantID" class="control-label"></label>
-                <select asp-for="PlantID" class ="form-control" asp-items="ViewBag.PlantID"></select>
+                <label asp-for="PlantID" class="control-label"></label>                
+                @Html.DropDownListFor(model => model.PlantID, (SelectList)ViewBag.PlandID, "Select Plant", new { @class = "form-control" })
+                <span asp-validation-for="PlantID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BatchID" class="control-label"></label>
-                <input asp-for="BatchID" class="form-control" />
+                @Html.DropDownListFor(model => model.PlantBatch, (SelectList)ViewBag.PlantBatchID, "Select Plant Batch", new { @class = "form-control" })
                 <span asp-validation-for="BatchID" class="text-danger"></span>
             </div>
             <div class="form-group">

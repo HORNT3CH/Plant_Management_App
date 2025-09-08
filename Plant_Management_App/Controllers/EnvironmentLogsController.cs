@@ -47,8 +47,8 @@ namespace Plant_Management_App.Controllers
 
         // GET: EnvironmentLogs/Create
         public IActionResult Create()
-        {
-            ViewData["GreenhouseID"] = new SelectList(_context.Set<Greenhouse>(), "GreenhouseID", "GreenhouseID");
+        {            
+            ViewBag.GreenhouseID = new SelectList(_context.Greenhouse.OrderBy(s => s.Name), "GreenhouseID", "Name");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace Plant_Management_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LogID,GreenhouseID,LogDate,TermperatureC,HumidityPercent,Notes")] EnvironmentLog environmentLog)
+        public async Task<IActionResult> Create([Bind("LogID,GreenhouseID,LogDate,TemperatureC,HumidityPercent,Notes")] EnvironmentLog environmentLog)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace Plant_Management_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LogID,GreenhouseID,LogDate,TermperatureC,HumidityPercent,Notes")] EnvironmentLog environmentLog)
+        public async Task<IActionResult> Edit(int id, [Bind("LogID,GreenhouseID,LogDate,TemperatureC,HumidityPercent,Notes")] EnvironmentLog environmentLog)
         {
             if (id != environmentLog.LogID)
             {

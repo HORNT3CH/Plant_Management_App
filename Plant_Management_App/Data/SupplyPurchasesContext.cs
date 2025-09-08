@@ -15,5 +15,6 @@ namespace Plant_Management_App
         }
 
         public DbSet<Plant_Management_App.Models.SupplyPurchase> SupplyPurchase { get; set; } = default!;
+        public DbSet<Plant_Management_App.Models.Supply> Supply { get; set; } = default!;
     }
 }

@@ -48,7 +48,17 @@ namespace Plant_Management_App.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["CustomerID"] = new SelectList(_context.Set<Customer>(), "CustomerID", "CustomerID");
+            ViewBag.CustomerID = new SelectList(
+            _context.Customer
+                .OrderBy(p => p.FirstName)
+                .Select(p => new
+                {
+                    p.CustomerID,
+                    FullName = p.FirstName + " " + p.LastName
+                }),
+            "CustomerID",
+            "FullName"
+        );
             return View();
         }
 

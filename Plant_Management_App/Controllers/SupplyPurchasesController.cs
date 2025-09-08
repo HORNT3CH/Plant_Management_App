@@ -47,8 +47,8 @@ namespace Plant_Management_App.Controllers
 
         // GET: SupplyPurchases/Create
         public IActionResult Create()
-        {
-            ViewData["SupplyID"] = new SelectList(_context.Set<Supply>(), "SupplyID", "SupplyID");
+        {            
+            ViewBag.SupplyID = new SelectList(_context.Supply.OrderBy(s => s.Name), "SupplyID", "Name");
             return View();
         }
 
