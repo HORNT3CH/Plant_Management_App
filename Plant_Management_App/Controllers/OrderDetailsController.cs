@@ -108,10 +108,14 @@ namespace Plant_Management_App.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetUnitPrice(int inventoryId)
+        public async Task<IActionResult> GetUnitPrice(int inventoryId)
         {
-            var price = _context.Inventory.FirstOrDefault(i => i.InventoryID == inventoryId)?.UnitPrice ?? 0;
-            return Json(new { unitPrice = price });
+            var price = await _context.Inventory
+                .Where(i => i.InventoryID == inventoryId)
+                .Select(i => i.UnitPrice)
+                .FirstOrDefaultAsync();
+
+            return Json(price);
         }
 
         // GET: OrderDetails/Edit/5

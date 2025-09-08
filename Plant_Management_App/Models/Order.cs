@@ -14,7 +14,7 @@ namespace Plant_Management_App.Models
         [DisplayName("Order Date")]
         public DateTime OrderDate { get; set; }
         [DisplayName("Total Amount")]
-        public decimal TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; } = 0.0m;
 
         public ICollection<OrderDetail>? OrderDetails { get; set; }
     }

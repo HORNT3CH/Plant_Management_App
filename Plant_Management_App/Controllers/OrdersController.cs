@@ -22,9 +22,22 @@ namespace Plant_Management_App.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var ordersContext = _context.Order.Include(o => o.Customer);
-            return View(await ordersContext.ToListAsync());
+            var orders = await _context.Order
+                .Include(o => o.Customer)
+                .Include(o => o.OrderDetails)
+                .ToListAsync();
+
+            // Calculate total for each order
+            foreach (var order in orders)
+            {
+                order.TotalAmount = order.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+            }
+
+            await _context.SaveChangesAsync(); // Optional if you want to persist changes
+
+            return View(orders);
         }
+
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -36,14 +49,23 @@ namespace Plant_Management_App.Controllers
 
             var order = await _context.Order
                 .Include(o => o.Customer)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Inventory)
+                        .ThenInclude(i => i.Plant)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
+
             if (order == null)
             {
                 return NotFound();
             }
 
+            // Dynamically calculate the total (optional if you store it elsewhere)
+            order.TotalAmount = order.OrderDetails.Sum(od => od.Quantity * od.UnitPrice);
+            await _context.SaveChangesAsync(); // Optional: saves the new total to DB
+
             return View(order);
         }
+
 
         // GET: Orders/Create
         public IActionResult Create(int? ordersId)
@@ -67,7 +89,7 @@ namespace Plant_Management_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderID,CustomerID,OrderDate,TotalAmount")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderID,CustomerID,OrderDate")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +140,7 @@ namespace Plant_Management_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderID,CustomerID,OrderDate,TotalAmount")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderID,CustomerID,OrderDate")] Order order)
         {
             if (id != order.OrderID)
             {
