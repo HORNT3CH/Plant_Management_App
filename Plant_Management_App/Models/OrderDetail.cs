@@ -17,6 +17,7 @@ namespace Plant_Management_App.Models
         [Display(Name = "Unit Price")]
         public decimal UnitPrice { get; set; }
 
-        public decimal Subtotal => Quantity * UnitPrice;
+        public decimal Subtotal => Quantity * UnitPrice;        
+
     }
 }

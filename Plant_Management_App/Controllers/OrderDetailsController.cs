@@ -47,12 +47,30 @@ namespace Plant_Management_App.Controllers
         }
 
         // GET: OrderDetails/Create
-        public IActionResult Create()
+        public IActionResult Create(int? ordersId)
         {
-            ViewData["InventoryID"] = new SelectList(_context.Set<Inventory>(), "InventoryID", "InventoryID");
-            ViewData["OrderID"] = new SelectList(_context.Set<Order>(), "OrderID", "OrderID");
-            return View();
+            if (ordersId == null)
+                return BadRequest("Order ID is required.");
+
+            var model = new OrderDetail
+            {
+                OrderID = ordersId.Value
+            };
+
+            ViewData["InventoryID"] = new SelectList(
+                _context.Inventory.Include(i => i.Plant)
+                .Select(i => new
+                {
+                    i.InventoryID,
+                    Description = i.Plant.CommonName + " - " + i.Location
+                }),
+                "InventoryID", "Description");
+
+            ViewData["OrderID"] = new SelectList(_context.Order, "OrderID", "OrderID", ordersId);
+
+            return View(model); // ✅ pass the model
         }
+
 
         // POST: OrderDetails/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -61,15 +79,39 @@ namespace Plant_Management_App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OrderDetailID,OrderID,InventoryID,Quantity,UnitPrice")] OrderDetail orderDetail)
         {
+            var inventory = await _context.Inventory.FindAsync(orderDetail.InventoryID);
+
+            if (inventory == null)
+            {
+                ModelState.AddModelError("", "Selected inventory item does not exist.");
+            }
+            else if (orderDetail.Quantity > inventory.QuantityAvailable)
+            {
+                ModelState.AddModelError("Quantity", $"Not enough stock. Only {inventory.QuantityAvailable} units available.");
+            }
+
             if (ModelState.IsValid)
             {
+                // Decrease stock
+                inventory.QuantityAvailable -= orderDetail.Quantity;
+
                 _context.Add(orderDetail);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
+            // Repopulate dropdowns on validation error
             ViewData["InventoryID"] = new SelectList(_context.Set<Inventory>(), "InventoryID", "InventoryID", orderDetail.InventoryID);
             ViewData["OrderID"] = new SelectList(_context.Set<Order>(), "OrderID", "OrderID", orderDetail.OrderID);
             return View(orderDetail);
+        }
+
+        [HttpGet]
+        public JsonResult GetUnitPrice(int inventoryId)
+        {
+            var price = _context.Inventory.FirstOrDefault(i => i.InventoryID == inventoryId)?.UnitPrice ?? 0;
+            return Json(new { unitPrice = price });
         }
 
         // GET: OrderDetails/Edit/5

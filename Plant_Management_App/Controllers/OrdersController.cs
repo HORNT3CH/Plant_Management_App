@@ -46,7 +46,7 @@ namespace Plant_Management_App.Controllers
         }
 
         // GET: Orders/Create
-        public IActionResult Create()
+        public IActionResult Create(int? ordersId)
         {
             ViewBag.CustomerID = new SelectList(
             _context.Customer
@@ -73,10 +73,27 @@ namespace Plant_Management_App.Controllers
             {
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Redirect user to OrderDetails/Create with this OrderID
+                return RedirectToAction("Create", "OrderDetails", new { ordersId = order.OrderID });
             }
-            ViewData["CustomerID"] = new SelectList(_context.Set<Customer>(), "CustomerID", "CustomerID", order.CustomerID);
+            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerID", order.CustomerID);
             return View(order);
+        }
+
+        public async Task<IActionResult> Print(int id)
+        {
+            var order = await _context.Order
+                .Include(o => o.Customer)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(d => d.Inventory)
+                        .ThenInclude(i => i.Plant)
+                .FirstOrDefaultAsync(o => o.OrderID == id);
+
+            if (order == null)
+                return NotFound();
+
+
+            return View("Print", order!); // or just return View(order);
         }
 
         // GET: Orders/Edit/5

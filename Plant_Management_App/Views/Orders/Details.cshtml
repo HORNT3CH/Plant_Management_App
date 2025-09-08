@@ -5,7 +5,9 @@
 }
 <br />
 <h1 class="mt-5">Details for Order # @Model.OrderID</h1>
-
+<a asp-action="Print" asp-route-id="@Model.OrderID" class="btn btn-outline-secondary" target="_blank">
+    🖨️ Print Order
+</a>
 <div>    
     <hr />
     <dl class="row">

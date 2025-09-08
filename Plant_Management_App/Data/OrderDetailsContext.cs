@@ -15,5 +15,7 @@ namespace Plant_Management_App
         }
 
         public DbSet<Plant_Management_App.Models.OrderDetail> OrderDetail { get; set; } = default!;
+        public DbSet<Plant_Management_App.Models.Inventory> Inventory { get; set; } = default!;
+        public DbSet<Plant_Management_App.Models.Order> Order { get; set; } = default!;
     }
 }
