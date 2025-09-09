@@ -96,7 +96,7 @@ namespace Plant_Management_App.Controllers
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 // Redirect user to OrderDetails/Create with this OrderID
-                return RedirectToAction("Create", "OrderDetails", new { ordersId = order.OrderID });
+                return RedirectToAction("Create", "OrderDetails", new { orderId = order.OrderID });
             }
             ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerID", order.CustomerID);
             return View(order);

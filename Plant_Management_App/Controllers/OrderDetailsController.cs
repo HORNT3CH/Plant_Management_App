@@ -101,7 +101,7 @@ namespace Plant_Management_App.Controllers
                 _context.Add(orderDetail);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Orders");
             }
 
             // Repopulate dropdowns on validation error
