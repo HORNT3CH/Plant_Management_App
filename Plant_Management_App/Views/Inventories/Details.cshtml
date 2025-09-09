@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 <br />
-<h1 class="mt-5">Details for @Model.Plant</h1>
+<h1 class="mt-5">Details for @Model.Plant.CommonName</h1>
 
 <div>    
     <hr />
@@ -13,7 +13,7 @@
             @Html.DisplayNameFor(model => model.Plant)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Plant.PlantID)
+            @Html.DisplayFor(model => model.Plant.CommonName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BatchID)

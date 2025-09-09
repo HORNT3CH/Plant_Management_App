@@ -82,7 +82,7 @@ namespace Plant_Management_App.Controllers
             {
                 return NotFound();
             }
-            ViewData["GreenhouseID"] = new SelectList(_context.Set<Greenhouse>(), "GreenhouseID", "GreenhouseID", environmentLog.GreenhouseID);
+            ViewData["GreenhouseID"] = new SelectList(_context.Set<Greenhouse>(), "GreenhouseID", "Name", environmentLog.GreenhouseID);
             return View(environmentLog);
         }
 

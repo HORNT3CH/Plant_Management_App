@@ -83,7 +83,7 @@ namespace Plant_Management_App.Controllers
             {
                 return NotFound();
             }
-            ViewData["PlantID"] = new SelectList(_context.Set<Plant>(), "PlantID", "PlantID", inventory.PlantID);
+            ViewBag.PlantID = new SelectList(_context.Plant.OrderBy(p => p.CommonName), "PlantID", "CommonName");            
             return View(inventory);
         }
 
