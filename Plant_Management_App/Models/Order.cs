@@ -11,7 +11,7 @@ namespace Plant_Management_App.Models
         public int CustomerID { get; set; }
         public Customer? Customer { get; set; }
 
-        [DisplayName("Order Date")]
+        [DisplayName("Order Date")]        
         public DateTime OrderDate { get; set; }
         [DisplayName("Total Amount")]
         public decimal TotalAmount { get; set; } = 0.0m;

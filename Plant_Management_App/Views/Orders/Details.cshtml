@@ -8,6 +8,9 @@
 <a asp-action="Print" asp-route-id="@Model.OrderID" class="btn btn-outline-secondary" target="_blank">
     🖨️ Print Order
 </a>
+<a asp-controller="OrderDetails" asp-action="Create" asp-route-orderId="@Model.OrderID" class="btn btn-success">
+    ➕ Add Item to Order
+</a>
 <div>    
     <hr />
     <dl class="row">
@@ -15,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Customer)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Customer.CustomerID)
+            @($"{Model.Customer.FirstName} {Model.Customer.LastName}")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.OrderDate)
@@ -27,10 +30,45 @@
             @Html.DisplayNameFor(model => model.TotalAmount)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalAmount)
+            @* @Html.DisplayFor(model => model.TotalAmount) *@
+            @Model.TotalAmount.ToString("C")
         </dd>
     </dl>
 </div>
+@if (Model.OrderDetails != null && Model.OrderDetails.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Plant</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@detail.Inventory?.Plant?.CommonName</td>
+                    <td>@detail.Quantity</td>
+                    <td>@(detail.UnitPrice.ToString("C"))</td>
+                    <td>@((detail.Quantity* detail.UnitPrice).ToString("C"))</td>
+                    <td>
+                        <a asp-action="Edit" asp-controller="OrderDetails" asp-route-id="@detail.OrderDetailID">✏️</a> |
+                        <a asp-action="Delete" asp-controller="OrderDetails" asp-route-id="@detail.OrderDetailID">🗑️</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p><em>No items added to this order yet.</em></p>
+}
+
 <div>
     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.OrderID">Edit</a> |
     <a class="btn btn-secondary" asp-action="Index">Back to List</a>

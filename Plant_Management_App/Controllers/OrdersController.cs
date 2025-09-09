@@ -131,7 +131,17 @@ namespace Plant_Management_App.Controllers
             {
                 return NotFound();
             }
-            ViewData["CustomerID"] = new SelectList(_context.Set<Customer>(), "CustomerID", "CustomerID", order.CustomerID);
+            ViewBag.CustomerID = new SelectList(
+                _context.Customer
+                    .OrderBy(c => c.FirstName)
+                    .Select(c => new
+                    {
+                        c.CustomerID,
+                        FullName = c.FirstName + " " + c.LastName
+                    }),
+                "CustomerID",
+                "FullName"
+            );            
             return View(order);
         }
 

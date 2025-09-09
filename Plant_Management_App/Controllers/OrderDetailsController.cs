@@ -47,14 +47,14 @@ namespace Plant_Management_App.Controllers
         }
 
         // GET: OrderDetails/Create
-        public IActionResult Create(int? ordersId)
+        public IActionResult Create(int? orderId)
         {
-            if (ordersId == null)
+            if (orderId == null)
                 return BadRequest("Order ID is required.");
 
             var model = new OrderDetail
             {
-                OrderID = ordersId.Value
+                OrderID = orderId.Value
             };
 
             ViewData["InventoryID"] = new SelectList(
@@ -66,10 +66,13 @@ namespace Plant_Management_App.Controllers
                 }),
                 "InventoryID", "Description");
 
-            ViewData["OrderID"] = new SelectList(_context.Order, "OrderID", "OrderID", ordersId);
+            // You can optionally remove this ViewData["OrderID"] entirely
+            // since we already pass it as a hidden input
+            ViewData["OrderID"] = new SelectList(_context.Order, "OrderID", "OrderID", orderId);
 
-            return View(model); // ✅ pass the model
+            return View(model);
         }
+
 
 
         // POST: OrderDetails/Create
